@@ -33,7 +33,7 @@ const sidebarNav = [
         link: '/netmagics/advocate',
         section: 'settings',
         icon: <i className='bx bx-cog'></i>,
-        text: 'Advocate'
+        text: 'Admin'
     }
 ]
 

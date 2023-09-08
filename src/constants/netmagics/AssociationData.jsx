@@ -1,7 +1,49 @@
 import EditAssociation from "../../components/netmagicsdashboard/association-component/EditAssociation";
+import axiosInstance from '../../configs/axios/AxiosVonfiguration'
+
+
+
+// const handleButtonClick = (row) => {
+//   axios.patch(`association/suspend-association/${row.id}`, {
+//     id: row.id,
+//     status: row.status ? 'Suspended' : 'Active' 
+//   })
+//   .then(response => {
+//     console.log(response.data);
+//   })
+//   .catch(error => {
+//     console.error('There was an error!', error);
+//   });
+// }
+
+
+const handleSuspend=async(userid,is_suspend)=>{
+    
+  try {
+    if(is_suspend){
+      await axiosInstance.patch(`association/suspend-association/${userid}`).then((response)=>{
+            console.log(response.data);
+          }).catch((error)=>{
+            console.log(error);
+          })
+    }else{
+      await axiosInstance.patch(`association/suspend-association/${userid}`).then((response)=>{
+        console.log(response.data);
+      }).catch((error)=>{
+        console.log(error);
+      })
+    }
+    
+  } catch (error) {
+     console.log(error);
+  }
+  }
+
+
+
 export const Columns = [
     {
-      name: 'Name',
+      name: 'Association Name',
       selector: (row) => row.name,
       sortable: true,
     },
@@ -15,27 +57,47 @@ export const Columns = [
         selector: (row) => row.court,
         sortable: true,
       },
+    // {
+    //   name: 'Edit',
+    //   selector: (row) => (
+    //     // <button className="bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+    //     //   Edit
+    //     // </button>
+    //     <EditAssociation/>
+    //   ),
+    //   sortable: false, 
+    // },
+
+
+    // {
+    //   name: 'Suspend',
+    //   selector: (row) => (
+    //     <button className="bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+    //       Delete
+    //     </button>
+    //   ),
+    //   sortable: false,
+    // },
+
     {
-      name: 'Edit',
+      name: 'Suspend',
       selector: (row) => (
-        // <button className="bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
-        //   Edit
-        // </button>
-        <EditAssociation/>
-      ),
-      sortable: false, 
-    },
-    {
-      name: 'Delete',
-      selector: (row) => (
-        <button className="bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
-          Delete
+        <button onClick={()=>handleSuspend(row.id,row.is_suspend)} className={`bg-${row.is_suspend ? 'red' :'green'}-500  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded`}>
+          {row.is_suspend ? 'suspend' : 'unsuspend'}
         </button>
       ),
       sortable: false,
     },
+    
+
+
   ];
   
+
+
+
+
+
 
 export const Data = [
     {

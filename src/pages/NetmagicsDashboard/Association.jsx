@@ -7,12 +7,12 @@ import AddAssociation from '../../components/netmagicsdashboard/association-comp
 import { Columns } from '../../constants/netmagics/AssociationData'
 import axiosInstance from '../../configs/axios/AxiosVonfiguration'
 function Association() {
-   const [data , setData]=useState([])
+   const [association , setAssociation]=useState([])
 
    useEffect(()=>{
       axiosInstance.get('/association/list').then((response)=>{
          console.log("association",response.data);
-         setData(response.data)
+         setAssociation(response.data)
       }).catch((error)=>{
          console.log(error);
       })
@@ -29,7 +29,7 @@ function Association() {
         {/* <i class='bx bx-search-alt'></i> */}
      </div>
      <div >
-        <AddAssociation/>
+        {/* <AddAssociation/> */}
      </div>
     
     </div>
@@ -37,7 +37,7 @@ function Association() {
      
      <DataTable
      columns={Columns}
-     data={data}
+     data={association}
      fixedHeader
      pagination>
 

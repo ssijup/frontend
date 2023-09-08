@@ -18,7 +18,7 @@ export const Columns = [
       },
       {
         name: 'Status',
-        selector: (row) => row.is_suspend ? "Active" : "Suspended",
+        selector: (row) => row.is_suspend ? "Suspended" : "Active",
         sortable: true,
       },
     // {
